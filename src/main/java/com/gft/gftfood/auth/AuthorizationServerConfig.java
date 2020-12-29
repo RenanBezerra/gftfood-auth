@@ -35,6 +35,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 			.accessTokenValiditySeconds(6 * 60 * 60)
 			.refreshTokenValiditySeconds( 60 * 24 * 60 * 60)
 		.and()
+			.withClient("foodanalitics")
+			.secret(passwordEncoder.encode("food123"))
+			.authorizedGrantTypes("authorization_code")
+			.scopes("write","read")
+			.redirectUris("http://aplicacao-cliente")
+			//http://localhost:8081/oauth/authorize?response_type=code&client_id=foodanalitics&state=abc&redirect_uri=http://aplicacao-cliente
+		.and()
 			.withClient("faturamento")
 			.secret(passwordEncoder.encode("faturamento123"))
 			.authorizedGrantTypes("client_credentials")
@@ -48,7 +55,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		//security.checkTokenAccess("isAuthenticated()");
+		//security.checkTokenAccess("isAuthenticated()")
 		security.checkTokenAccess("permitAll()");
 	
 	}
