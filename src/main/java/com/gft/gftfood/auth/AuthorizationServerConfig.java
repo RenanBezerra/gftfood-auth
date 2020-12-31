@@ -40,10 +40,18 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 				.redirectUris("http://aplicacao-cliente")
 				// http://localhost:8081/oauth/authorize?response_type=token&client_id=webadmin&state=abc&redirect_uri=http://aplicacao-cliente
 				.and()
-				.withClient("foodanalitics").secret(passwordEncoder.encode("food123"))
+				.withClient("foodanalitics").secret(passwordEncoder.encode(""))
 				.authorizedGrantTypes("authorization_code").scopes("write", "read")
-				.redirectUris("http://aplicacao-cliente")
+				.redirectUris("http://www.foodanalitics.local:8082")
 				// http://localhost:8081/oauth/authorize?response_type=code&client_id=foodanalitics&state=abc&redirect_uri=http://aplicacao-cliente
+				
+				// http://localhost:8081/oauth/authorize?response_type=code&client_id=foodanalitics&redirect_uri=http://www.foodanalitics.local:8082&code_challenge=teste123&code_challenge_method=plain
+				.and()
+				.withClient("webadmin")
+				.authorizedGrantTypes("implicit")
+				.scopes("write", "read")
+				.redirectUris("http://aplicacao-cliente")
+				
 				.and()
 				.withClient("faturamento").secret(passwordEncoder.encode("faturamento123"))
 				.authorizedGrantTypes("client_credentials").scopes("write", "read").and().withClient("checktoken")
@@ -54,7 +62,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 		// security.checkTokenAccess("isAuthenticated()")
-		security.checkTokenAccess("permitAll()");
+		security.checkTokenAccess("permitAll()")
+			.allowFormAuthenticationForClients();
 
 	}
 
