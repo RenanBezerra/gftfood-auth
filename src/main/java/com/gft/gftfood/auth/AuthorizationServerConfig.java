@@ -39,18 +39,25 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 				.withClient("webadmin").authorizedGrantTypes("implicit").scopes("write", "read")
 				.redirectUris("http://aplicacao-cliente")
 				// http://localhost:8081/oauth/authorize?response_type=token&client_id=webadmin&state=abc&redirect_uri=http://aplicacao-cliente
+				
 				.and()
 				.withClient("foodanalitics").secret(passwordEncoder.encode(""))
 				.authorizedGrantTypes("authorization_code").scopes("write", "read")
 				.redirectUris("http://www.foodanalitics.local:8082")
-				// http://localhost:8081/oauth/authorize?response_type=code&client_id=foodanalitics&state=abc&redirect_uri=http://aplicacao-cliente
-				
 				// http://localhost:8081/oauth/authorize?response_type=code&client_id=foodanalitics&redirect_uri=http://www.foodanalitics.local:8082&code_challenge=teste123&code_challenge_method=plain
+				//codeVerifier:test123
+				//codeChalenge:test123
+				
+				// http://localhost:8081/oauth/authorize?response_type=code&client_id=foodanalitics&redirect_uri=http://www.foodanalitics.local:8082&code_challenge=7_gzRZ-yfzhZ8gH8ljPTzxZXGBn3sC4iRAXqRbCN5mw&code_challenge_method=s256
+				//codeVerifier:iwdcfbuwefcbubfuberufbuebfeouqwbeeflkjwbecdqeifbqwhefbhjbef codigo para s256 e baseUrl
+				//codeChalenge:7_gzRZ-yfzhZ8gH8ljPTzxZXGBn3sC4iRAXqRbCN5mw   com sha256 e baseUrl
+				
 				.and()
 				.withClient("webadmin")
 				.authorizedGrantTypes("implicit")
 				.scopes("write", "read")
 				.redirectUris("http://aplicacao-cliente")
+				// http://localhost:8081/oauth/authorize?response_type=code&client_id=foodanalitics&state=abc&redirect_uri=http://aplicacao-cliente
 				
 				.and()
 				.withClient("faturamento").secret(passwordEncoder.encode("faturamento123"))
