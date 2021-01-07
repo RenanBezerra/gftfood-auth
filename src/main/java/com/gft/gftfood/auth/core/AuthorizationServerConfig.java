@@ -1,4 +1,4 @@
-package com.gft.gftfood.auth;
+package com.gft.gftfood.auth.core;
 
 import java.util.Arrays;
 
