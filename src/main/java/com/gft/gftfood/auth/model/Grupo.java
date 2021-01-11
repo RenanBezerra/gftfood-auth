@@ -14,11 +14,12 @@ import javax.persistence.ManyToMany;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Usuario {
+public class Grupo {
 
 	@EqualsAndHashCode.Include
 	@Id
@@ -28,14 +29,9 @@ public class Usuario {
 	@Column(nullable = false)
 	private String nome;
 
-	@Column(nullable = false)
-	private String email;
-
-	@Column(nullable = false)
-	private String senha;
-	
+	@Getter
 	@ManyToMany
-	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
-	private Set<Grupo> grupos = new HashSet<>();
+	@JoinTable(name = "grupo_permissao", joinColumns = @JoinColumn(name = "grupo_id"), inverseJoinColumns = @JoinColumn(name = "permissao_id"))
+	private Set<Permissao> permissoes = new HashSet<>();
 
 }
