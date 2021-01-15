@@ -47,14 +47,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory().withClient("gftfood-web").secret(passwordEncoder.encode("web123"))
-				.authorizedGrantTypes("password", "refresh_token").scopes("write", "read")
+				.authorizedGrantTypes("password", "refresh_token").scopes("WRITE", "READ")
 				.accessTokenValiditySeconds(6 * 60 * 60).refreshTokenValiditySeconds(60 * 24 * 60 * 60).and()
-				.withClient("webadmin").authorizedGrantTypes("implicit").scopes("write", "read")
+				.withClient("webadmin").authorizedGrantTypes("implicit").scopes("WRITE", "READ")
 				.redirectUris("http://aplicacao-cliente")
 				// http://localhost:8081/oauth/authorize?response_type=token&client_id=webadmin&state=abc&redirect_uri=http://aplicacao-cliente
 
 				.and().withClient("foodanalitics").secret(passwordEncoder.encode(""))
-				.authorizedGrantTypes("authorization_code").scopes("write", "read")
+				.authorizedGrantTypes("authorization_code").scopes("WRITE", "READ")
 				.redirectUris("http://www.foodanalitics.local:8082")
 				// http://localhost:8081/oauth/authorize?response_type=code&client_id=foodanalitics&redirect_uri=http://www.foodanalitics.local:8082&code_challenge=teste123&code_challenge_method=plain
 				// codeVerifier:test123
@@ -65,12 +65,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 				// codigo para s256 e baseUrl
 				// codeChalenge:7_gzRZ-yfzhZ8gH8ljPTzxZXGBn3sC4iRAXqRbCN5mw com sha256 e baseUrl
 
-				.and().withClient("webadmin").authorizedGrantTypes("implicit").scopes("write", "read")
+				.and().withClient("webadmin").authorizedGrantTypes("implicit").scopes("WRITE", "READ")
 				.redirectUris("http://aplicacao-cliente")
 				// http://localhost:8081/oauth/authorize?response_type=code&client_id=foodanalitics&state=abc&redirect_uri=http://aplicacao-cliente
 
 				.and().withClient("faturamento").secret(passwordEncoder.encode("faturamento123"))
-				.authorizedGrantTypes("client_credentials").scopes("write", "read").and().withClient("checktoken")
+				.authorizedGrantTypes("client_credentials").scopes("WRITE", "READ").and().withClient("checktoken")
 				.secret(passwordEncoder.encode("check123"));
 
 	}
