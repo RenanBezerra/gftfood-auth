@@ -78,6 +78,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		return approvalStore;
 	}
 
+	//http://localhost:8081/oauth/authorize?response_type=code&client_id=foodanalytics&redirect_uri=http://www.foodanalytics.local:8082&state=abc
 //	private TokenStore redisTokenStore() {
 //		return new RedisTokenStore(redisConnectionFactory);
 //	}
